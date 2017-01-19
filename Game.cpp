@@ -9,6 +9,7 @@
 
 Game::Game() 
 	: _running(false)
+	, _commands(std::map<Command::Action, Command*>())
 {
 }
 
@@ -23,7 +24,12 @@ bool Game::Initialize(const char* title, int xpos, int ypos, int width, int heig
 	
 	if (_running)
 	{//SETUP WHATEVER NEEDS TO BE SETUP
-		
+		_character = new Character();
+
+		_commands[Command::Action::MoveDown] = new Command(Command::Action::MoveDown);
+		_commands[Command::Action::MoveUp] = new Command(Command::Action::MoveUp);
+		_commands[Command::Action::MoveLeft] = new Command(Command::Action::MoveLeft);
+		_commands[Command::Action::MoveRight] = new Command(Command::Action::MoveRight);
 	}
 
 	return _running;
@@ -72,7 +78,7 @@ void Game::Update()
 
 
 	//UPDATE HERE
-	
+
 
 	//save the curent time for next frame
 	_lastTime = currentTime;
@@ -91,22 +97,67 @@ void Game::Render()
 
 void Game::HandleEvents()
 {
-	SDL_Event event;
-
-	while (SDL_PollEvent(&event))
+	SDL_Event e;
+	while (SDL_PollEvent(&e) != 0)
 	{
-		switch (event.type)
+		switch (e.type)
 		{
 		case SDL_KEYDOWN:
-			switch (event.key.keysym.sym)
+			switch (e.key.keysym.sym)
 			{
-			case SDLK_ESCAPE:
-				_running = false;
+			case SDLK_a:
+				_macroCommand.Add(_commands[Command::Action::MoveLeft]);
+				break;
+			case SDLK_d:
+				_macroCommand.Add(_commands[Command::Action::MoveRight]);
+				break;
+			case SDLK_w:
+				_macroCommand.Add(_commands[Command::Action::MoveUp]);
+				break;
+			case SDLK_s:
+				_macroCommand.Add(_commands[Command::Action::MoveDown]);
+
+
+			case SDLK_LEFT:
+				_macroCommand.Add(_commands[Command::Action::MoveLeft]);
+				break;
+			case SDLK_RIGHT:
+				_macroCommand.Add(_commands[Command::Action::MoveRight]);
+				break;
+			case SDLK_UP:
+				_macroCommand.Add(_commands[Command::Action::MoveUp]);
+				break;
+			case SDLK_DOWN:
+				_macroCommand.Add(_commands[Command::Action::MoveDown]);
 				break;
 
-			default:
+			case SDLK_SPACE:
+				_macroCommand.Add(_commands[Command::Action::MoveUp]);
+				break;
+
+
+			case SDLK_BACKSPACE:
+				_macroCommand.Undo(_character);
+				break;
+
+			case SDLK_RETURN:
+				_macroCommand.Execute(_character);
+				break;
+
+			case SDLK_ESCAPE:
+				SDL_Quit();
 				break;
 			}
+			break;
+
+		case SDL_KEYUP:
+			switch (e.key.keysym.sym)
+			{
+
+			}
+			break;
+
+		default:
 			break;
 		}
 	}

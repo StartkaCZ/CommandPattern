@@ -87,14 +87,22 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Character.cpp" />
+    <ClCompile Include="Command.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="LTimer.cpp" />
+    <ClCompile Include="MacroCommand.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Receiver.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Character.h" />
+    <ClInclude Include="Command.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="LTimer.h" />
+    <ClInclude Include="MacroCommand.h" />
+    <ClInclude Include="Receiver.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Levels.xml">

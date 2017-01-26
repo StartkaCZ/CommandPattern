@@ -174,7 +174,11 @@ void Game::CleanUp()
 	DEBUG_MSG("Cleaning Up");
 
 	//DESTROY HERE
-
+	delete _commands[Command::Action::MoveDown];
+	delete _commands[Command::Action::MoveUp];
+	delete _commands[Command::Action::MoveLeft];
+	delete _commands[Command::Action::MoveRight];
+	_commands.clear();
 
 	SDL_DestroyWindow(_window);
 	SDL_DestroyRenderer(_renderer);

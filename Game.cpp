@@ -106,41 +106,52 @@ void Game::HandleEvents()
 			switch (e.key.keysym.sym)
 			{
 			case SDLK_a:
+				std::cout << "a pressed" << std::endl;
 				_macroCommand.Add(_commands[Command::Action::MoveLeft]);
 				break;
 			case SDLK_d:
+				std::cout << "d pressed" << std::endl;
 				_macroCommand.Add(_commands[Command::Action::MoveRight]);
 				break;
 			case SDLK_w:
+				std::cout << "w pressed" << std::endl;
 				_macroCommand.Add(_commands[Command::Action::MoveUp]);
 				break;
 			case SDLK_s:
+				std::cout << "s pressed" << std::endl;
 				_macroCommand.Add(_commands[Command::Action::MoveDown]);
 
 
 			case SDLK_LEFT:
+				std::cout << "left pressed" << std::endl;
 				_macroCommand.Add(_commands[Command::Action::MoveLeft]);
 				break;
 			case SDLK_RIGHT:
+				std::cout << "right pressed" << std::endl;
 				_macroCommand.Add(_commands[Command::Action::MoveRight]);
 				break;
 			case SDLK_UP:
+				std::cout << "up pressed" << std::endl;
 				_macroCommand.Add(_commands[Command::Action::MoveUp]);
 				break;
 			case SDLK_DOWN:
+				std::cout << "down pressed" << std::endl;
 				_macroCommand.Add(_commands[Command::Action::MoveDown]);
 				break;
 
 			case SDLK_SPACE:
+				std::cout << "space pressed" << std::endl;
 				_macroCommand.Add(_commands[Command::Action::MoveUp]);
 				break;
 
 
 			case SDLK_BACKSPACE:
+				std::cout << "undo pressed" << std::endl;
 				_macroCommand.Undo(_character);
 				break;
 
 			case SDLK_RETURN:
+				std::cout << "enter pressed" << std::endl;
 				_macroCommand.Execute(_character);
 				break;
 
